@@ -9,8 +9,8 @@
 #include <iomanip>
 #include <limits>
 #include "imgui/imgui.h"
-#include "imgui_impl_sdl.h"
-#include "imgui_impl_sdlrenderer.h"
+#include "imgui_impl_sdl2.h"
+#include "imgui_impl_sdlrenderer2.h"
 
 
 typedef int node_t;
@@ -574,7 +574,7 @@ public:
 			if (this->stillInserting)
 			{
 
-				ImGui_ImplSDLRenderer_NewFrame();
+				ImGui_ImplSDLRenderer2_NewFrame();
 				ImGui_ImplSDL2_NewFrame();
 				ImGui::NewFrame();
 
@@ -622,7 +622,7 @@ public:
 
 				ImGui::Render();
 
-				ImGui_ImplSDLRenderer_RenderDrawData(ImGui::GetDrawData());
+				ImGui_ImplSDLRenderer2_RenderDrawData(ImGui::GetDrawData());
 			}
 
 			SDL_RenderPresent(this->rend);
@@ -639,14 +639,14 @@ public:
   		 	ImGui::StyleColorsDark();
 
 			ImGui_ImplSDL2_InitForSDLRenderer(this->win, this->rend);
-			ImGui_ImplSDLRenderer_Init(this->rend);
+			ImGui_ImplSDLRenderer2_Init(this->rend);
 			ImGuiIO& io = ImGui::GetIO(); (void)io;
 			io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
 		}
 
 		void destroySubWinAndRend_imgui(void){
 
-			ImGui_ImplSDLRenderer_Shutdown();
+			ImGui_ImplSDLRenderer2_Shutdown();
 			ImGui_ImplSDL2_Shutdown();
 			ImGui::DestroyContext();
 			SDL_DestroyRenderer(this->rend);
